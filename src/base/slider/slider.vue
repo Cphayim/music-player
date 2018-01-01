@@ -109,9 +109,22 @@ export default {
           speed: 400
         }
       })
-
       // 监听滚动结束事件
       this.slider.on('scrollEnd', this._onScrollEnd)
+
+      // 监听手动滚动开始前事件
+      this.slider.on('beforeScrollStart', () => {
+        if (this.autoPlay) {
+          clearTimeout(this.timer)
+        }
+      })
+
+      // 监听触摸结束事件
+      this.slider.on('touchend', () => {
+        if (this.autoPlay) {
+          this._play()
+        }
+      })
     },
 
     /**
